@@ -11,7 +11,7 @@ data class DataDicodingEvent(
     val ownerName: String,
     val cityName: String,
     val quota: Int,
-    val registrant: Int,
+    val registrants: Int,
     val beginTime: String,
     val endTime: String,
     val link: String

@@ -3,10 +3,13 @@ package com.example.submissionfundamentalpertama.AllPage
 import android.annotation.SuppressLint
 import android.content.Intent
 import android.net.Uri
+import android.text.*
 import android.util.Log
 import android.webkit.WebView
+import android.widget.TextView
 import androidx.compose.foundation.Image
 import androidx.compose.foundation.border
+import androidx.compose.foundation.content.MediaType.Companion.HtmlText
 import androidx.compose.foundation.layout.Arrangement
 import androidx.compose.foundation.layout.Box
 import androidx.compose.foundation.layout.Column
@@ -87,7 +90,7 @@ fun PageDetail(
                 fetchPagedetail()
             },
 
-        )
+            )
         if (dataDicodingEventDetailCache == null) {
             fetchPagedetail()
         }
@@ -179,9 +182,15 @@ fun PageDetail(
                             )
                             Text(text = "Sisa Kuota:")
                             Text(
-                                text = data.quota.toString(),
+                                text = "${data.quota - data.registrants}",
                                 fontWeight = FontWeight.Bold
                             )
+                            Text(text = "Registrant:")
+                            Text(
+                                text = data.registrants.toString(),
+                                fontWeight = FontWeight.Bold
+                            )
+                            Log.d("get registrant",data.registrants.toString())
                         }
                     )
 
@@ -191,51 +200,57 @@ fun PageDetail(
                         fontWeight = FontWeight.Bold,
                         modifier = Modifier.padding(start = 20.dp)
                     )
+
+
+
+//                    AndroidView(
+//                        modifier = Modifier,
+//                        factory = { context ->
+//                            TextView(context).apply {
+//                                text = Html.fromHtml(data.description,Html.FROM_HTML_MODE_COMPACT)
+//
+//                            }
+//                        }
+//                    )
                     AndroidView(
                         factory = {
                             WebView(it).apply {
                                 settings.javaScriptEnabled = true
-                                loadData(
-                                    data.description,
-                                    "text/html; charset=utf-8",
-                                    "UTF-8"
-                                )
-                            }
-                        },
-                        update = { asd ->
-                            val customLebarGambarHtml = """
+                                loadDataWithBaseURL(
+                                    null,
+                                    """
                                      <html>
                                         <head>
                                             <style>
                                                 body {
-                                                    font-family: 'Roboto', sans-serif; 
+                                                    font-family: 'Roboto', sans-serif;
                                                     margin: 0;
                                                     padding: 10px;
-                                                    background-color: #F9F9F9; 
+                                                    background-color: #F9F9F9;
                                                     color: #333333;
                                                 }
                                                 p {
                                                     font-size: 14px;
-                                                    line-height: 1.6; 
+                                                    line-height: 1.6;
                                                     margin-bottom: 10px;
                                                 }
                                                 img {
-                                                    max-width: 100%; 
-                                                    height: auto; 
+                                                    max-width: 100%;
+                                                    height: auto;
                                                     border-radius: 8px;
                                                 }
                                                 ul, ol {
-                                                    margin-left: 20px; 
+                                                    margin-left: 20px;
                                                 }
                                                 .note {
                                                     color: #E25241;
                                                     font-weight: bold;
-                                                    margin-top: 10px; 
+                                                    margin-top: 10px;
                                                 }
                                                 hr {
                                                     border: 0;
-                                                    border-top: 1px solid #cccccc; 
-                                                    margin: 20px 0; 
+                                                    border-top: 1px solid #cccccc;
+                                                    margin: 20px 0;
                                                 }
                                             </style>
                                         </head>
@@ -243,8 +258,12 @@ fun PageDetail(
                                              ${data.description}
                                         </body>
                                     </html>
-                                """.trimIndent()
-                            asd.loadData(customLebarGambarHtml, "text/html; charset=utf-8", "UTF-8")
+                                """.trimIndent(),
+                                    "text/html; charset=utf-8",
+                                    "UTF-8",
+                                    null
+                                )
+                            }
                         },
                         modifier = Modifier
                             .padding(10.dp)
