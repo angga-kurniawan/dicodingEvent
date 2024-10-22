@@ -19,6 +19,7 @@ import androidx.compose.foundation.lazy.LazyColumn
 import androidx.compose.foundation.lazy.items
 import androidx.compose.material3.CircularProgressIndicator
 import androidx.compose.material3.ExperimentalMaterial3Api
+import androidx.compose.material3.MaterialTheme
 import androidx.compose.material3.SnackbarHostState
 import androidx.compose.material3.Text
 import androidx.compose.material3.TopAppBarDefaults
@@ -162,13 +163,15 @@ fun PageHome(navController: NavController, scrollBehavior: TopAppBarScrollBehavi
                             text = "Kenapa Event Penting bagi jenjang karirmu",
                             textAlign = TextAlign.Center,
                             fontSize = 25.sp,
-                            modifier = Modifier.fillMaxWidth()
+                            modifier = Modifier.fillMaxWidth(),
+                            color = MaterialTheme.colorScheme.onPrimary
                         )
                         Spacer(modifier = Modifier.padding(5.dp))
                         Text(
                             text = "Berikut ini adalah manfaat yang akan kamu dapatkan jika aktif bergabung dalam event Dicoding.",
                             textAlign = TextAlign.Center,
-                            modifier = Modifier.fillMaxWidth()
+                            modifier = Modifier.fillMaxWidth(),
+                            color = MaterialTheme.colorScheme.onPrimary
                         )
                         Image(
                             painter = rememberAsyncImagePainter("https://dicoding-web-img.sgp1.cdn.digitaloceanspaces.com/original/commons/event-ui-upgrade.png"),
@@ -182,13 +185,15 @@ fun PageHome(navController: NavController, scrollBehavior: TopAppBarScrollBehavi
                             text = "Upgrade Kemampuan Teknis",
                             textAlign = TextAlign.Center,
                             fontSize = 25.sp,
-                            modifier = Modifier.fillMaxWidth()
+                            modifier = Modifier.fillMaxWidth(),
+                            color = MaterialTheme.colorScheme.onPrimary
                         )
                         Spacer(modifier = Modifier.padding(5.dp))
                         Text(
                             text = "Banyak pembicara yang sudah lama di dunia IT dari berbagai bidang, sehingga Anda dapat memilih event yang sesuai dengan kemampuan/minat anda.",
                             textAlign = TextAlign.Center,
-                            modifier = Modifier.fillMaxWidth()
+                            modifier = Modifier.fillMaxWidth(),
+                            color = MaterialTheme.colorScheme.onPrimary
                         )
                         Image(
                             painter = rememberAsyncImagePainter("https://dicoding-web-img.sgp1.cdn.digitaloceanspaces.com/original/commons/event-ui-network.png"),
@@ -202,13 +207,15 @@ fun PageHome(navController: NavController, scrollBehavior: TopAppBarScrollBehavi
                             text = "Bangun Jaringan",
                             textAlign = TextAlign.Center,
                             fontSize = 25.sp,
-                            modifier = Modifier.fillMaxWidth()
+                            modifier = Modifier.fillMaxWidth(),
+                            color = MaterialTheme.colorScheme.onPrimary
                         )
                         Spacer(modifier = Modifier.padding(5.dp))
                         Text(
                             text = "Event dihadiri oleh pembicara yang top dan peserta dari berbagai daerah, sehingga Anda bisa berkesempatan membangun relasi dengan pembicara, peserta dan orang-orang hebat di sana.",
                             textAlign = TextAlign.Center,
-                            modifier = Modifier.fillMaxWidth()
+                            modifier = Modifier.fillMaxWidth(),
+                            color = MaterialTheme.colorScheme.onPrimary
                         )
                         Image(
                             painter = rememberAsyncImagePainter("https://dicoding-web-img.sgp1.cdn.digitaloceanspaces.com/original/commons/event-ui-update.png"),
@@ -222,13 +229,15 @@ fun PageHome(navController: NavController, scrollBehavior: TopAppBarScrollBehavi
                             text = "Up-to-Date Terhadap Perkembangan Teknologi",
                             textAlign = TextAlign.Center,
                             fontSize = 25.sp,
-                            modifier = Modifier.fillMaxWidth()
+                            modifier = Modifier.fillMaxWidth(),
+                            color = MaterialTheme.colorScheme.onPrimary
                         )
                         Spacer(modifier = Modifier.padding(5.dp))
                         Text(
                             text = "Materi yang dibawakan sesuai perberkembang IT saat ini, sehingga Anda tidak ketinggalan perkembangan teknologi terkini.",
                             textAlign = TextAlign.Center,
-                            modifier = Modifier.fillMaxWidth()
+                            modifier = Modifier.fillMaxWidth(),
+                            color = MaterialTheme.colorScheme.onPrimary
                         )
                     }
                 )
@@ -255,7 +264,7 @@ fun PageHome(navController: NavController, scrollBehavior: TopAppBarScrollBehavi
                                 Spacer(modifier = Modifier.padding(20.dp))
                                 Text(
                                     text = "Upcoming Events",
-                                    color = Color(0xFF000823),
+                                    color = MaterialTheme.colorScheme.primary,
                                     fontSize = 25.sp,
                                     textAlign = TextAlign.Center,
                                     modifier = Modifier
@@ -264,7 +273,7 @@ fun PageHome(navController: NavController, scrollBehavior: TopAppBarScrollBehavi
                                 )
                                 Text(
                                     text = "Jangan ketinggalan event-event yang akan datang. Pilihlah sesuai dengan minat Anda dan silakan hadir di kota terdekat Anda.",
-                                    color = Color(0xFF000823),
+                                    color = MaterialTheme.colorScheme.onPrimary,
                                     textAlign = TextAlign.Center,
                                     modifier = Modifier
                                         .padding(10.dp)
@@ -350,13 +359,13 @@ fun PageHome(navController: NavController, scrollBehavior: TopAppBarScrollBehavi
                             text = "Successful Events",
                             fontSize = 25.sp,
                             modifier = Modifier.padding(10.dp),
-                            color = Color(0xFF000823)
+                            color =MaterialTheme.colorScheme.onPrimary
                         )
                         Text(
                             textAlign = TextAlign.Center,
                             text = "Simak Event mana saja yang sukses diselenggarakan. Acara-acara ini punya reputasi networking yang luas, follow-up action yang positif, dan tentunya sesak dihadiri lebih dari 100 persen target peserta. Penasaran?",
                             modifier = Modifier.padding(10.dp),
-                            color = Color(0xFF000823)
+                            color =MaterialTheme.colorScheme.onPrimary
                         )
                     }
                 )

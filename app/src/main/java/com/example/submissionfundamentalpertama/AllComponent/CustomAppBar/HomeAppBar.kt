@@ -4,6 +4,7 @@ import androidx.compose.foundation.layout.Column
 import androidx.compose.foundation.layout.fillMaxWidth
 import androidx.compose.material3.ExperimentalMaterial3Api
 import androidx.compose.material3.LargeTopAppBar
+import androidx.compose.material3.MaterialTheme
 import androidx.compose.material3.Text
 import androidx.compose.material3.TopAppBarDefaults
 import androidx.compose.material3.TopAppBarScrollBehavior
@@ -14,6 +15,7 @@ import androidx.compose.ui.graphics.Color
 import androidx.compose.ui.tooling.preview.Preview
 import androidx.compose.ui.unit.dp
 import androidx.compose.ui.unit.sp
+import com.example.submissionfundamentalpertama.Adapter.DarkMode.DarkModeAndLight
 
 @OptIn(ExperimentalMaterial3Api::class)
 @Composable
@@ -27,20 +29,21 @@ fun HomeAppBar(scrollBehavior: TopAppBarScrollBehavior) {
             ),
         scrollBehavior = scrollBehavior,
         colors = TopAppBarDefaults.topAppBarColors(
-            Color.White
+           containerColor =  MaterialTheme.colorScheme.background,
+            scrolledContainerColor = MaterialTheme.colorScheme.background
         ),
         title = {
             Column {
                 Text(
                     text = "Dicoding Event",
-                    color = Color(0xFF000823),
+                    color = MaterialTheme.colorScheme.primary,
                     modifier = Modifier.fillMaxWidth()
                 )
                 if (scrollBehavior.state.collapsedFraction < 0.1f) {
                     Text(
                         text = "Recommendation event for you",
                         fontSize = 15.sp,
-                        color = Color(0xFF000823),
+                        color = MaterialTheme.colorScheme.onPrimary,
                         modifier = Modifier.fillMaxWidth()
                     )
                 }

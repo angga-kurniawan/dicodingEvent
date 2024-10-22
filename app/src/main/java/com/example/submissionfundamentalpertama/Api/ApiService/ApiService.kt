@@ -21,4 +21,10 @@ interface ApiService {
     suspend fun getDetail(
         @Query("id") getId: Int,
     ): Response<DataDicodingEventResponse>
+
+    @GET("events")
+    suspend fun getActiveEvents(
+        @Query("active") active: Int = -1,
+        @Query("limit") limit: Int = 1
+    ): Response<DataDicodingEventResponse>
 }

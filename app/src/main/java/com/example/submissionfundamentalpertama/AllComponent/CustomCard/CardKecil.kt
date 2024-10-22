@@ -13,6 +13,7 @@ import androidx.compose.foundation.layout.width
 import androidx.compose.foundation.shape.RoundedCornerShape
 import androidx.compose.material3.Card
 import androidx.compose.material3.CardDefaults
+import androidx.compose.material3.MaterialTheme
 import androidx.compose.material3.Text
 import androidx.compose.runtime.Composable
 import androidx.compose.ui.Modifier
@@ -34,7 +35,7 @@ fun CardKecil(
 ) {
     Card(
         colors = CardDefaults.cardColors(
-            Color.White
+            MaterialTheme.colorScheme.secondary
         ),
         modifier = Modifier
             .width(200.dp)
@@ -77,7 +78,7 @@ fun CardKecil(
                                             start = 10.dp,
                                             end = 10.dp
                                         ),
-                                        color = Color(0xFF565656),
+                                        color = MaterialTheme.colorScheme.onPrimary,
                                         fontSize = 10.sp
                                     )
                                 }
@@ -91,7 +92,7 @@ fun CardKecil(
                             )
                             Row(
                                 content = {
-                                    Text(text = "oleh: ", fontSize = 10.sp)
+                                    Text(text = "oleh: ", fontSize = 10.sp, color = MaterialTheme.colorScheme.onPrimary)
                                     Text(
                                         text = ownerName,
                                         fontSize = 10.sp,

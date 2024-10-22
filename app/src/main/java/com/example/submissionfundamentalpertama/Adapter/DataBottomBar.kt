@@ -3,7 +3,9 @@ package com.example.submissionfundamentalpertama.Adapter
 import androidx.compose.material.icons.Icons
 import androidx.compose.material.icons.filled.AccountBox
 import androidx.compose.material.icons.filled.DateRange
+import androidx.compose.material.icons.filled.FavoriteBorder
 import androidx.compose.material.icons.filled.Home
+import androidx.compose.material.icons.filled.Settings
 import androidx.compose.ui.graphics.vector.ImageVector
 
 sealed class DataBottomBar(
@@ -27,5 +29,17 @@ sealed class DataBottomBar(
         route = "Finished",
         icon = Icons.Default.AccountBox,
         title = "Finshed"
+    )
+
+    data object Favorite: DataBottomBar(
+        route = "Favorite",
+        icon = Icons.Default.FavoriteBorder,
+        title = "Favorite"
+    )
+
+    data object Settings: DataBottomBar(
+        route = "Settings",
+        icon = Icons.Default.Settings,
+        title = "Settings"
     )
 }

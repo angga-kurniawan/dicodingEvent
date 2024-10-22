@@ -19,6 +19,6 @@ fun HitungHari(beginTime: String,endTime: String): String {
                 $daysLeft Hari Lagi
             """.trimIndent()
         }
-        else -> "Sedang berlangsung" // Jika waktu saat ini di antara waktu mulai dan berakhir
+        else -> "Sedang berlangsung"
     }
 }

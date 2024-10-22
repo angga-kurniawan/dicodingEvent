@@ -1,6 +1,7 @@
 package com.example.submissionfundamentalpertama.AllComponent.CustomAppBar
 
 import androidx.compose.material3.ExperimentalMaterial3Api
+import androidx.compose.material3.MaterialTheme
 import androidx.compose.material3.Text
 import androidx.compose.material3.TopAppBar
 import androidx.compose.material3.TopAppBarDefaults
@@ -21,10 +22,10 @@ fun UpComingAppBar() {
             spotColor = Color(0xFF00B0FF)
         ),
         colors = TopAppBarDefaults.topAppBarColors(
-            Color.White
+            containerColor = MaterialTheme.colorScheme.background
         ),
         title = {
-            Text(text = "Up-Coming", color = Color(0xFF000823))
+            Text(text = "Up-Coming", color = MaterialTheme.colorScheme.onPrimary)
         }
     )
 }

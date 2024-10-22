@@ -8,39 +8,51 @@ import androidx.activity.enableEdgeToEdge
 import androidx.compose.foundation.layout.Column
 import androidx.compose.foundation.layout.padding
 import androidx.compose.material3.ExperimentalMaterial3Api
+import androidx.compose.material3.MaterialTheme
 import androidx.compose.material3.Scaffold
 import androidx.compose.material3.TopAppBarDefaults
 import androidx.compose.runtime.LaunchedEffect
+import androidx.compose.runtime.collectAsState
 import androidx.compose.runtime.getValue
 import androidx.compose.runtime.mutableStateOf
 import androidx.compose.runtime.remember
 import androidx.compose.runtime.setValue
 import androidx.compose.ui.Modifier
+import androidx.compose.ui.platform.LocalContext
 import androidx.lifecycle.viewmodel.compose.viewModel
 import androidx.navigation.compose.NavHost
 import androidx.navigation.compose.composable
 import androidx.navigation.compose.currentBackStackEntryAsState
 import androidx.navigation.compose.rememberNavController
+import com.example.submissionfundamentalpertama.Adapter.DarkMode.DarkModeAndLight
+import com.example.submissionfundamentalpertama.Adapter.DarkMode.ThemePreferances
 import com.example.submissionfundamentalpertama.AllComponent.CustomAppBar.AppBarrDetail
+import com.example.submissionfundamentalpertama.AllComponent.CustomAppBar.FavoriteAppBar
 import com.example.submissionfundamentalpertama.AllComponent.CustomAppBar.FinishedAppBar
 import com.example.submissionfundamentalpertama.AllComponent.CustomAppBar.HomeAppBar
+import com.example.submissionfundamentalpertama.AllComponent.CustomAppBar.SettingAppBar
 import com.example.submissionfundamentalpertama.AllComponent.CustomAppBar.UpComingAppBar
 import com.example.submissionfundamentalpertama.AllComponent.CustomBottomBar.BottomBar
 import com.example.submissionfundamentalpertama.AllPage.PageDetail
+import com.example.submissionfundamentalpertama.AllPage.PageFavorite
 import com.example.submissionfundamentalpertama.AllPage.PageFinished
 import com.example.submissionfundamentalpertama.AllPage.PageHome
+import com.example.submissionfundamentalpertama.AllPage.PageSettings
 import com.example.submissionfundamentalpertama.AllPage.PageUpComing
 import com.example.submissionfundamentalpertama.Api.ApiViewModel.DataDicodingEventViewModel
 import com.example.submissionfundamentalpertama.Api.DataDicodingEvent
-import com.example.submissionfundamentalpertama.ui.theme.SubmissionFundamentalPertamaTheme
 
 class MainActivity : ComponentActivity() {
+
     @OptIn(ExperimentalMaterial3Api::class)
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
         enableEdgeToEdge()
+        val themePreferenceManager = ThemePreferances(applicationContext)
         setContent {
-            SubmissionFundamentalPertamaTheme {
+            val isDarkMode =
+                themePreferenceManager.isDarkTheme.collectAsState(initial = false).value
+            DarkModeAndLight().DarkModeTheme(darkTheme = isDarkMode) {
                 val navControler = rememberNavController()
                 var getRouteAppBar by remember {
                     mutableStateOf("")
@@ -78,10 +90,19 @@ class MainActivity : ComponentActivity() {
                                         inputSearchFinished
                                     ) {
                                         searchResult = it
-                                        Log.d("get keyword appbar finished",searchResult.toString())
+                                        Log.d(
+                                            "get keyword appbar finished",
+                                            searchResult.toString()
+                                        )
                                     }
                                 }
                             )
+                            "Favorite" -> {
+                                FavoriteAppBar()
+                            }
+                            "Settings" -> {
+                                SettingAppBar()
+                            }
 
                             else -> {
                                 HomeAppBar(scrollBehavior = scrollBehavior)
@@ -114,6 +135,8 @@ class MainActivity : ComponentActivity() {
                                             Log.d("setId", set.toString())
                                         }
                                     }
+                                    composable("Favorite") { PageFavorite(navController = navControler) }
+                                    composable("Settings") { PageSettings(themePreferenceManager) }
                                 }
                             }
                         )
@@ -125,7 +148,8 @@ class MainActivity : ComponentActivity() {
                                 getTopBar = { getRouteAppBar = it }
                             )
                         }
-                    }
+                    },
+                    containerColor = MaterialTheme.colorScheme.background
                 )
             }
         }

@@ -1,6 +1,9 @@
 plugins {
     alias(libs.plugins.android.application)
     alias(libs.plugins.kotlin.android)
+    id("androidx.room") version "2.6.1" apply false
+    id("com.google.devtools.ksp") version "1.9.0-1.0.12"
+    id("kotlin-parcelize")
 }
 
 android {
@@ -51,7 +54,23 @@ android {
 
 dependencies {
 
-    // add
+    implementation(libs.androidx.runtime.livedata)
+//    implementation("androidx.core:core-ktx:2.2.0")
+    implementation(libs.androidx.work.runtime.ktx)
+    implementation ("androidx.work:work-runtime-ktx:2.7.1")
+    // add submission kedua
+    val room_version = "2.6.1"
+    implementation("androidx.room:room-runtime:$room_version")
+    ksp("androidx.room:room-compiler:$room_version")
+    implementation("androidx.room:room-ktx:$room_version")
+    implementation("androidx.room:room-rxjava2:$room_version")
+    implementation("androidx.room:room-rxjava3:$room_version")
+    implementation("androidx.room:room-guava:$room_version")
+    testImplementation("androidx.room:room-testing:$room_version")
+    implementation("androidx.room:room-paging:$room_version")
+    implementation ("com.github.bumptech.glide:compose:1.0.0-beta01")
+
+    // add subbmission pertama
     implementation(libs.coil.compose)
     implementation(libs.animated.navigation.bar)
     implementation (libs.retrofit)
@@ -59,6 +78,9 @@ dependencies {
     implementation(libs.coil.compose)
     implementation (libs.coil.gif)
     implementation (libs.accompanist.swiperefresh)
+    implementation ("androidx.constraintlayout:constraintlayout-compose:1.0.1")
+    implementation("androidx.datastore:datastore-preferences:1.0.0")
+
 
     // default
     implementation(libs.androidx.core.ktx)

@@ -15,7 +15,10 @@ import androidx.compose.foundation.layout.height
 import androidx.compose.foundation.layout.padding
 import androidx.compose.foundation.shape.RoundedCornerShape
 import androidx.compose.material3.Card
+import androidx.compose.material3.CardColors
+import androidx.compose.material3.CardDefaults
 import androidx.compose.material3.HorizontalDivider
+import androidx.compose.material3.MaterialTheme
 import androidx.compose.material3.Text
 import androidx.compose.runtime.Composable
 import androidx.compose.ui.Alignment
@@ -51,6 +54,9 @@ fun CardBesar(
         ).clickable {
             onClick(id)
         },
+        colors = CardDefaults.cardColors(
+            containerColor = MaterialTheme.colorScheme.secondary
+        ),
         content = {
             Image(
                 painter = rememberAsyncImagePainter(img),
@@ -62,7 +68,7 @@ fun CardBesar(
             )
             Box(
                 modifier = Modifier
-                    .background(Color.White)
+                    .background(MaterialTheme.colorScheme.secondary)
                     .fillMaxSize(),
                 content = {
                     Column(
@@ -85,7 +91,7 @@ fun CardBesar(
                                             start = 10.dp,
                                             end = 10.dp
                                         ),
-                                        color = Color(0xFF565656),
+                                        color = MaterialTheme.colorScheme.onPrimary,
                                         fontSize = 10.sp
                                     )
                                 }
@@ -99,7 +105,7 @@ fun CardBesar(
                             )
                             Row(
                                 content = {
-                                    Text(text = "oleh: ", fontSize = 10.sp)
+                                    Text(text = "oleh: ", fontSize = 10.sp , color = MaterialTheme.colorScheme.onPrimary)
                                     Text(
                                         text = ownerName,
                                         fontSize = 10.sp,
@@ -109,7 +115,8 @@ fun CardBesar(
                             )
                             Text(
                                 text = summary,
-                                modifier = Modifier.padding(top = 5.dp, bottom = 20.dp)
+                                modifier = Modifier.padding(top = 5.dp, bottom = 20.dp),
+                                color = MaterialTheme.colorScheme.onPrimary
                             )
 
                         }
@@ -121,7 +128,7 @@ fun CardBesar(
                 modifier = Modifier
                     .fillMaxWidth()
                     .height(60.dp)
-                    .background(Color(0xF0F8F8F8)),
+                    .background(MaterialTheme.colorScheme.onSecondary),
                 verticalArrangement = Arrangement.Center,
                 horizontalAlignment = Alignment.CenterHorizontally,
                 content = {
@@ -135,6 +142,7 @@ fun CardBesar(
                         fontSize = 10.sp,
                         fontWeight = FontWeight.Bold,
                         textAlign = TextAlign.Center,
+                        color = MaterialTheme.colorScheme.onPrimary
                     )
                 }
             )

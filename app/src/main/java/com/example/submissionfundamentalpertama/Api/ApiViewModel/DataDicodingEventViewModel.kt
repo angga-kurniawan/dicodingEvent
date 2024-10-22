@@ -7,18 +7,17 @@ import androidx.lifecycle.ViewModel
 import androidx.lifecycle.viewModelScope
 import com.example.submissionfundamentalpertama.Api.ApiClient.ApiClient
 import com.example.submissionfundamentalpertama.Api.DataDicodingEvent
+import com.example.submissionfundamentalpertama.Room.FavoriteDao
 import kotlinx.coroutines.launch
 
 @Suppress("unused", "unused")
 class DataDicodingEventViewModel : ViewModel() {
+    private lateinit var favoriteDao: FavoriteDao
 
     var eventOnGoing: List<DataDicodingEvent> = emptyList()
     var eventFinished: List<DataDicodingEvent> = emptyList()
     var eventDetailCache: MutableList<DataDicodingEvent> = mutableListOf()
-//    var eventSearch: List<DataDicodingEvent> = emptyList()
-    //    var dataDicodingEventFinished by remember {
-//        mutableStateOf<List<DataDicodingEvent>>(emptyList())
-//    }
+    var eventNotif: MutableList<DataDicodingEvent> = mutableListOf()
 
     fun fetchDataDicodingEvent(
         type: String,
@@ -53,6 +52,7 @@ class DataDicodingEventViewModel : ViewModel() {
                             Log.d("View Model", "Error: response todak sukses")
                         }
                     }
+
                     "Finished" -> {
                         if (response.isSuccessful) {
                             response.body()?.let {
@@ -66,24 +66,6 @@ class DataDicodingEventViewModel : ViewModel() {
                     }
                 }
 
-//                if (response.isSuccessful) {
-//                    response.body()?.let {
-//                        when (type) {
-//                            "On-Going" -> {
-//                                eventOnGoing = it.listEvents
-//                                Log.d("get data on Going", eventOnGoing.toString())
-//                                onResult(eventOnGoing)
-//                            }
-//
-//                            "Finished" -> {
-//                                eventFinished = it.listEvents
-//                                onResult(eventFinished)
-//                            }
-//                        }
-//                    }
-//                } else {
-//                    Log.d("View Model", "Error: response todak sukses")
-//                }
             } catch (e: Exception) {
                 Log.d("TRY CATCH VIEW MODEL", "Error ; $e")
                 getError("data api bermaslaah $e")
@@ -130,7 +112,6 @@ class DataDicodingEventViewModel : ViewModel() {
 
                         Log.d("get response event detail", eventDetail2.toString())
                         if (eventDetail2 != null) {
-//                            eventDetail = eventDetail2
                             eventDetailCache.add(eventDetail2)
                             onResult(eventDetail2)
                         }
@@ -140,9 +121,27 @@ class DataDicodingEventViewModel : ViewModel() {
                 Log.d("data dicoding event error", e.toString())
             }
         }
-
     }
 
+    fun fetchEvents(onResult: (DataDicodingEvent) -> Unit) {
+        viewModelScope.launch {
+            try {
+                val response = ApiClient.apiService.getActiveEvents()
+                if (response.isSuccessful) {
+                    response.body()?.let { events ->
+                        Log.d("fetch events", "events count: ${events}")
+                        onResult(events.listEvents.first())
+                    } ?: run {
+                        Log.d("fetch events", "Response body is null")
+                    }
+                } else {
+                    Log.e("fetch events", "Error: ${response.errorBody()?.string()}")
+                }
+            } catch (e: Exception) {
+                Log.e("fetch events error", e.toString())
+            }
+        }
+    }
 
 }
 

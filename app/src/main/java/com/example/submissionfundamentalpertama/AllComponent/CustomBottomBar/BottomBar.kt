@@ -1,7 +1,9 @@
 package com.example.submissionfundamentalpertama.AllComponent.CustomBottomBar
 
+import android.util.Log
 import androidx.compose.foundation.layout.wrapContentHeight
 import androidx.compose.material3.Icon
+import androidx.compose.material3.MaterialTheme
 import androidx.compose.material3.NavigationBar
 import androidx.compose.material3.NavigationBarItem
 import androidx.compose.material3.NavigationBarItemDefaults
@@ -25,7 +27,9 @@ fun BottomBar(navController: NavController, getTopBar: (String) -> Unit) {
     val getBottomBar = listOf(
         DataBottomBar.Home,
         DataBottomBar.UpComing,
-        DataBottomBar.Finished
+        DataBottomBar.Finished,
+        DataBottomBar.Favorite,
+        DataBottomBar.Settings
     )
 
     NavigationBar(
@@ -33,8 +37,7 @@ fun BottomBar(navController: NavController, getTopBar: (String) -> Unit) {
         content = {
             getBottomBar.forEach(
                 action = { navItem ->
-                    val isSelected =
-                        navBackEntry?.destination?.hierarchy?.any { it.route == navItem.route } == true
+                    val isSelected = navBackEntry?.destination?.hierarchy?.any { it.route == navItem.route } == true
                     NavigationBarItem(
                         modifier = Modifier.wrapContentHeight(),
                         selected = isSelected,
@@ -42,13 +45,18 @@ fun BottomBar(navController: NavController, getTopBar: (String) -> Unit) {
                             Icon(imageVector = navItem.icon, contentDescription = "icon")
                         },
                         onClick = {
-                            getTopBar(navItem.route)
-                            navController.navigate(navItem.route) {
-                                popUpTo(navController.graph.startDestinationId) {
-                                    saveState = true
+                            try {
+
+                                getTopBar(navItem.route)
+                                navController.navigate(navItem.route) {
+                                    popUpTo(navController.graph.startDestinationId) {
+                                        saveState = true
+                                    }
+                                    launchSingleTop = true
+                                    restoreState = true
                                 }
-                                launchSingleTop = true
-                                restoreState = true
+                            } catch (e: Exception) {
+                                Log.d("bottom bar","bjir lah $e")
                             }
                         },
                         label = {
@@ -57,15 +65,15 @@ fun BottomBar(navController: NavController, getTopBar: (String) -> Unit) {
                         colors = NavigationBarItemDefaults.colors(
                             selectedIconColor = Color(0xFFEE299B),
                             selectedTextColor = Color(0xFFEE299B),
-                            unselectedIconColor = Color(0xFF000823),
-                            unselectedTextColor = Color(0xFF000823),
-                            indicatorColor = if (isSelected) Color.White else Color(0xFF1E2022)
+                            unselectedIconColor = MaterialTheme.colorScheme.onPrimary,
+                            unselectedTextColor = MaterialTheme.colorScheme.onPrimary,
+                            indicatorColor = if (isSelected) MaterialTheme.colorScheme.surface else MaterialTheme.colorScheme.background
                         )
                     )
                 }
             )
         },
-        containerColor = Color.White
+        containerColor = MaterialTheme.colorScheme.background
     )
 }
 
@@ -74,3 +82,9 @@ fun BottomBar(navController: NavController, getTopBar: (String) -> Unit) {
 private fun BottomBarPrev() {
     BottomBar(rememberNavController()) {}
 }
+
+
+
+
+
+

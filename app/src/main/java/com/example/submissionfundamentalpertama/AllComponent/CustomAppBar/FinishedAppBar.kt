@@ -7,6 +7,7 @@ import androidx.compose.material.icons.Icons
 import androidx.compose.material.icons.filled.Search
 import androidx.compose.material3.ExperimentalMaterial3Api
 import androidx.compose.material3.Icon
+import androidx.compose.material3.MaterialTheme
 import androidx.compose.material3.OutlinedTextField
 import androidx.compose.material3.TopAppBar
 import androidx.compose.material3.TopAppBarDefaults
@@ -36,7 +37,7 @@ fun FinishedAppBar(
                     Icon(
                         imageVector = Icons.Default.Search,
                         contentDescription = "search",
-                        tint = Color(0xFF000823)
+                        tint = MaterialTheme.colorScheme.onPrimary
                     )
                 },
                 shape = RoundedCornerShape(10.dp),
@@ -58,7 +59,7 @@ fun FinishedAppBar(
                     onSearch(it)
                 },
                 textStyle = TextStyle(
-                    color = Color(0xFF000823)
+                    color = MaterialTheme.colorScheme.onPrimary
                 ),
                 singleLine = true
             )
@@ -70,7 +71,7 @@ fun FinishedAppBar(
         ),
         colors = TopAppBarDefaults.largeTopAppBarColors(
             //            Color(0xFF000823)
-            Color.White
+            containerColor = MaterialTheme.colorScheme.background
         )
     )
 }
